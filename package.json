@@ -1,0 +1,26 @@
+{
+  "name": "mnhs-student-record-worker",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start:send_notification": "WORKER_NAME=send_notification nodemon --env-file=.env index.js",
+    "start:spawn_notification": "WORKER_NAME=spawn_notification nodemon --env-file=.env index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "amqplib": "^0.10.3",
+    "dayjs": "^1.11.10",
+    "html-to-text": "^9.0.5",
+    "lodash": "^4.17.21",
+    "nodemailer": "^6.9.12"
+  },
+  "devDependencies": {
+    "eslint": "^8.56.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.29.1",
+    "nodemon": "^3.1.0"
+  }
+}
