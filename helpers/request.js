@@ -1,3 +1,4 @@
+import config from '../config/index.js';
 import { objectToQueryString } from './general.js';
 import { generateResponse } from './response.js';
 
@@ -18,7 +19,7 @@ export const get = async ({ uri, query }) => {
     }
 
     try {
-        const response = await fetch(`${process.env.API}${uri}${queryString}`, {
+        const response = await fetch(`${config.api.host}${uri}${queryString}`, {
             ...options,
             method: 'GET',
         });
@@ -40,7 +41,7 @@ export const post = async ({ uri, query, body = {} }) => {
     }
 
     try {
-        const response = await fetch(`${process.env.API}${uri}${queryString}`, {
+        const response = await fetch(`${config.api.host}${uri}${queryString}`, {
             ...options,
             method: 'POST',
             body: JSON.stringify(body),
@@ -65,7 +66,7 @@ export const patch = async ({ uri, query, body = {} }) => {
     }
 
     try {
-        const response = await fetch(`${process.env.API}${uri}${queryString}`, {
+        const response = await fetch(`${config.api.host}${uri}${queryString}`, {
             ...options,
             method: 'PATCH',
             body: JSON.stringify(body),

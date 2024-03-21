@@ -5,8 +5,8 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "start:send_notification": "WORKER_NAME=send_notification nodemon --env-file=.env index.js",
-    "start:spawn_notification": "WORKER_NAME=spawn_notification nodemon --env-file=.env index.js"
+    "start:send_notification": "NODE_ENV=development WORKER_NAME=send_notification nodemon --env-file=.env index.js",
+    "start:spawn_notification": "NODE_ENV=development WORKER_NAME=spawn_notification nodemon --env-file=.env index.js"
   },
   "author": "",
   "license": "ISC",

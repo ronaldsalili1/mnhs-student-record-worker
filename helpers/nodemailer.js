@@ -1,6 +1,8 @@
 import nodemailer from 'nodemailer';
 import { convert } from 'html-to-text';
 
+import config from '../config/index.js';
+
 function sleep(ms) {
     return new Promise((resolve) => {
         setTimeout(resolve, ms);
@@ -16,8 +18,8 @@ export default async function sendEmail(data) {
         html,
     } = data;
     const transporter = nodemailer.createTransport({
-        host: process.env.SMTP_HOST,
-        port: process.env.SMTP_PORT,
+        host: config.smtp.host,
+        port: config.smtp.port,
         secure: false,
         auth: {
             user: process.env.SMTP_USER,
@@ -27,7 +29,7 @@ export default async function sendEmail(data) {
     const text = convert(html, { wordwrap: 130 });
 
     const email = {
-        from: process.env.FROM_EMAIL,
+        from: config.smtp.from,
         to,
         ...(cc && { cc }),
         ...(bcc && { bcc }),

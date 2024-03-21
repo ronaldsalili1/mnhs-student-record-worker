@@ -1,29 +1,31 @@
 import amqp from 'amqplib';
 
+import config from './config/index.js';
 import Logger from './helpers/logger.js';
 
+const workerName = process.env.WORKER_NAME;
 const username = process.env.AMQP_USERNAME;
 const password = process.env.AMQP_PASSWORD;
-const host = process.env.AMQP_HOST;
-const port = process.env.AMQP_PORT;
-const vhost = process.env.AMQP_VHOST;
+const {
+    domain,
+    port,
+    vhost,
+    queuePrefix,
+} = config.worker;
 
 async function start() {
-    const { WORKER_NAME } = process.env;
-
-    if (!WORKER_NAME) {
+    if (!workerName) {
         throw new Error('WORKER_NAME flag is required to start worker');
     }
 
-    const SYSTEM_PREFIX = process.env.AMQP_QUEUE_PREFIX;
-    const QUEUE_NAME = `${SYSTEM_PREFIX}_${WORKER_NAME}`;
+    const QUEUE_NAME = `${queuePrefix}_${workerName}`;
     const DEAD_LETTER_QUEUE_NAME = `${QUEUE_NAME}_buried`;
-    const amqpHost = `amqp://${username}:${password}@${host}:${port}/${vhost}`;
+    const amqpHost = `amqp://${username}:${password}@${domain}:${port}/${vhost}`;
 
     try {
         const connection = await amqp.connect(amqpHost);
         const channel = await connection.createChannel();
-        const Worker = await import(`./workers/${WORKER_NAME}/index.js`);
+        const Worker = await import(`./workers/${workerName}/index.js`);
         const logger = new Logger({ name: QUEUE_NAME });
         // eslint-disable-next-line new-cap
         const worker = new Worker.default({ logger, channel });
