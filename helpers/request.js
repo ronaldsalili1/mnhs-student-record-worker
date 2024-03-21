@@ -47,8 +47,6 @@ export const post = async ({ uri, query, body = {} }) => {
             body: JSON.stringify(body),
         });
 
-        console.log('🚀 ~ response:', response);
-
         const jsonResponse = await response.json();
 
         return jsonResponse;
