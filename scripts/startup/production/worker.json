@@ -1,0 +1,32 @@
+[
+	{
+		"name": "mnhs-student-record-worker_spawn-notification",
+		"run_as_user": "deploy",
+		"cwd": "/home/deploy/mnhs-student-record-worker",
+		"script": "./index.js",
+		"log_date_format": "YYYY-MM-DD HH:mm:ss:SSS Z",
+		"env": {
+			"NODE_ENV": "production",
+			"WORKER_NAME": "spawn_notification"
+		},
+		"error_file": "/home/deploy/log/mnhs-student-record-worker/pm2-resource-error-spawn-notification.log",
+		"out_file": "/home/deploy/log/mnhs-student-record-worker/pm2-resource-output-spawn-notification.log",
+		"exec_mode": "cluster_mode",
+		"instances": 2
+	},
+	{
+		"name": "mnhs-student-record-worker_send-notification",
+		"run_as_user": "deploy",
+		"cwd": "/home/deploy/mnhs-student-record-worker",
+		"script": "./index.js",
+		"log_date_format": "YYYY-MM-DD HH:mm:ss:SSS Z",
+		"env": {
+			"NODE_ENV": "production",
+			"WORKER_NAME": "send_notification"
+		},
+		"error_file": "/home/deploy/log/mnhs-student-record-worker/pm2-resource-error-send-notification.log",
+		"out_file": "/home/deploy/log/mnhs-student-record-worker/pm2-resource-output-send-notification.log",
+		"exec_mode": "cluster_mode",
+		"instances": 2
+	}
+]
