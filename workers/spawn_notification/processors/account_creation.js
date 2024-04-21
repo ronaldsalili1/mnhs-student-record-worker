@@ -24,7 +24,7 @@ export default async ({ logger, payload }) => {
         
         <span>
             <strong>URL:</strong>
-            <a href={${link}}>
+            <a href=${link}>
                 ${link}
             </a>
         </span><br/>
