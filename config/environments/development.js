@@ -1,9 +1,9 @@
 export default {
     api: {
-        host: 'http://localhost:3000',
+        host: 'http://mnhs-student-record-api:3000',
     },
     worker: {
-        domain: '127.0.0.1',
+        domain: 'mnhs-student-record-rabbitmq',
         port: 5672,
         vhost: '',
         queuePrefix: 'mnhs',
